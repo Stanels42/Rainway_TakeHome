@@ -1,13 +1,23 @@
 #ControllerDisplay {
   height: 100%;
   width: 100%;
+
+  align-self: start;
+
+  /* position: relative; */
 }
 
-.DisplayBackground {
-  /* height: 100vh; */
-  width: 60vw
+.DisplayImage {
+  width: 900px;
+
+  position: absolute;
 }
 
 .hidden {
   display: none;
+}
+
+#leftStick {
+  margin-top: 0px;
+  margin-left: 0px;
 }
