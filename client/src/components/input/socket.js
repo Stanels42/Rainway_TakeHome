@@ -1,7 +1,7 @@
 import React from "react";
 
 class Socket{
-  constructor (url, updateCallback) {
+  constructor (updateCallback, url) {
     this.type = "Socket"
     this.url = url;
     this.updateCallback = updateCallback;

@@ -12,15 +12,16 @@ class InputController extends React.Component {
     }
   }
 
+  // Call back used by the different API types to send data
   collectInputData = (inputData) => {
-    console.log(this.state.activeInput.type)
+    console.log(inputData)
   }
 
   toggleSocket = (event) => {
     let activeInput = this.state.activeInput;
 
     if (activeInput === undefined) {
-      activeInput = new Socket(this.state.socketURL, this.collectInputData);
+      activeInput = new Socket(this.collectInputData, this.state.socketURL);
       activeInput.mount();
       this.setState ({
         activeInput: activeInput,
@@ -37,11 +38,14 @@ class InputController extends React.Component {
 
   render () {
 
+    let inputType = this.state.activeInput ? this.state.activeInput.type : undefined;
+
+    let socketControllerText = inputType !== "Socket" ? "Activate Socket" : "Deactivate Socket"
 
     return (
       <div>
         <div id="socketController">
-          <button onClick={this.toggleSocket}>Activate Socket</button>
+          <button onClick={this.toggleSocket}>{socketControllerText}</button>
         </div>
         <div id="apiController">
           {/* TODO: Add Real Controller API *Stretch Goal */}
