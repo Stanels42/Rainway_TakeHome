@@ -9,6 +9,7 @@ pattern = 'x xxx x   y yyy   b b   aaa a   x xxx xxx   y yyy   bbb b bbb bbb   a
 
 # Send 60 seconds of synthetic gamepad data.  
 async def send_gamepad_data(ws, path):
+    print('Client connected')
     t = 0.0
     def f(x): return 0.707 * sin(x)
     for i in range(60 * 60):
