@@ -1,10 +1,11 @@
 
 class ControllerInput {
 
-  constructor (updateCallback) {
+  constructor (updateCallback, updateTickRate) {
     this.type = "Controller";
     this.controller = undefined;
     this.updateCallback = updateCallback;
+    this.updateTickRate = updateTickRate
   }
 
 
@@ -50,7 +51,9 @@ class ControllerInput {
       }
 
       this.updateCallback(controllerInputs)
-      await new Promise(r => setTimeout(r, 4));
+
+      // Sleep Function From: https://stackoverflow.com/questions/951021/what-is-the-javascript-version-of-sleep
+      await new Promise(r => setTimeout(r, this.updateTickRate));
     }
   }
 

@@ -1,21 +1,23 @@
 import React from 'react';
 
 function displayThumbSticks (props) {
-  let leftStyle = calculatePosition(props.input['left']);
-  let rightStyle = calculatePosition(props.input['right']);
+  let leftStyle, rightStyle = {};
+
+  if (props.input) {
+    leftStyle = calculatePosition(props.input['left']);
+    rightStyle = calculatePosition(props.input['right']);
+  }
 
   return (
     <div>
-      <img class="DisplayImage" id="leftStick" src='./images/controller-LStick.png' style={leftStyle}/>
-      <img class="DisplayImage" id="rightStick" src='./images/controller-RStick.png'  style={rightStyle}/>
+      <img class="DisplayImage" id="leftStick" src='./images/controller-LStick.png' style={leftStyle} alt=""/>
+      <img class="DisplayImage" id="rightStick" src='./images/controller-RStick.png'  style={rightStyle} alt=""/>
     </div>
   );
 }
 
+
 function calculatePosition (inputData) {
-  if (!inputData) {
-    return {}
-  }
 
   let data = calculateOffset(inputData);
 

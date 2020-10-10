@@ -22,6 +22,7 @@ class Socket{
     this.updateCallback(messageData);
   }
 
+
   close () {
     try {
       this.webSocket.close();

@@ -1,7 +1,7 @@
 import React from 'react';
 
 import Socket from './socket';
-import ControllerInput from './controllerInput';
+import ControllerInput from './controllerAPIInput';
 
 import Display from '../display/display'
 
@@ -12,16 +12,17 @@ class InputController extends React.Component {
 
     this.state = {
       socketURL: 'ws:/localhost:4000',
+      controllerUpdateRate: 2,
       activeInput: undefined,
-      inputData: undefined,
-    }
+      inputData: {},
+    };
   }
 
   // Call back used by the different input types to send data
   collectInputData = (inputData) => {
     this.setState({
       inputData: inputData,
-    })
+    });
   }
 
 
@@ -29,20 +30,20 @@ class InputController extends React.Component {
     let activeInput = this.state.activeInput;
 
     if (activeInput === undefined) {
-      this.selectInputController(event.target.name)
+      this.selectInputController(event.target.name);
 
     } else if (activeInput.type === event.target.name) {
       this.closeInput(activeInput);
 
     } else { //Switching Between Input Types
       this.closeInput(activeInput);
-      this.selectInputController(event.target.name)
+      this.selectInputController(event.target.name);
     }
   }
 
   selectInputController(inputTypeName) {
     if (inputTypeName === "Controller") {
-      this.activateInput(new ControllerInput(this.collectInputData));
+      this.activateInput(new ControllerInput(this.collectInputData, this.state.controllerUpdateRate));
     } else if (inputTypeName === "Socket"){
       this.activateInput(new Socket(this.collectInputData, this.state.socketURL));
     }
@@ -58,8 +59,9 @@ class InputController extends React.Component {
   closeInput (activeInput) {
     activeInput.close();
     this.setState({
-      activeInput: undefined
-    })
+      activeInput: undefined,
+      inputData: {},
+    });
   }
 
 
@@ -67,9 +69,9 @@ class InputController extends React.Component {
 
     let inputType = this.state.activeInput ? this.state.activeInput.type : undefined;
 
-    let socketButtonText = inputType !== "Socket" ? "Activate Socket" : "Deactivate Socket"
+    let socketButtonText = inputType !== "Socket" ? "Activate Socket" : "Deactivate Socket";
 
-    let controllerButtonText = inputType !== "Controller" ? "Activate Controller" : "Deactivate Controller"
+    let controllerButtonText = inputType !== "Controller" ? "Activate Controller" : "Deactivate Controller";
 
     return (
       <div>
