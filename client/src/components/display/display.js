@@ -1,28 +1,19 @@
 import React from "react";
 
 import Buttons from './buttons';
+import ThumbSticks from './thumbsticks'
 
 import './display.css';
 
-class Display extends React.Component {
-  constructor (props) {
-    super(props)
-    this.background = './images/controller-Base.png'
-    this.xButton = './images/controller-blue-pressed.png';
-    this.yButton = './images/controller-yellow-pressed.png';
-    this.aButton = './images/controller-green-pressed.png';
-    this.bButton = './images/controller-red-pressed.png';
-    this.leftStick = './images/controller-LStick.png';
-    this.rightStick = './images/controller-RStick.png';
-  }
-
-  render () {
-    return (
-      <div id="ControllerDisplay">
-        <img class="DisplayImage" id="DisplayBackground" src={this.background}/>
-        <Buttons input={{x: true, y:false, a:false, b:false}}/>
-      </div>
-    )
-  }
+function display (props) {
+  return (
+    <div id="ControllerDisplay">
+      <img class="DisplayImage" id="DisplayBackground" src='./images/controller-Base.png'/>
+      <Buttons input={props.input ? props.input['buttons'] : {}}/>
+      <ThumbSticks input={props.input ? props.input['thumbsticks'] : {}}/>
+    </div>
+  )
 }
-export default Display;
+
+
+export default display;
