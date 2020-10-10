@@ -24,6 +24,7 @@ async def send_gamepad_data(ws, path):
             'right': {'x': x2, 'y': y2},
           },
           'buttons': {k: b == k for k in 'abxy'}
+          # 'buttons': {'a':True, 'b': False, 'x': False, 'y': False}
         })
         await ws.send(json_string)
 
