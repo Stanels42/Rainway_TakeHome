@@ -25,39 +25,41 @@ class InputController extends React.Component {
   }
 
 
-  toggleSocket = (event) => {
+  toggleInput = (event) => {
     let activeInput = this.state.activeInput;
 
     if (activeInput === undefined) {
-      activeInput = new Socket(this.collectInputData, this.state.socketURL);
-      activeInput.mount();
-      this.setState ({
-        activeInput: activeInput,
-      })
-    } else if (this.state.activeInput.type === "Socket") {
-      activeInput.close();
-      this.setState({
-        activeInput: undefined
-      })
+      this.selectInputController(event.target.name)
+
+    } else if (activeInput.type === event.target.name) {
+      this.closeInput(activeInput);
+
+    } else { //Switching Between Input Types
+      this.closeInput(activeInput);
+      this.selectInputController(event.target.name)
     }
   }
 
-
-  toggleController = (event) => {
-    let activeInput = this.state.activeInput;
-
-    if (activeInput === undefined) {
-      activeInput = new ControllerInput(this.collectInputData);
-      activeInput.mount()
-      this.setState ({
-        activeInput: activeInput,
-      })
-    } else if (this.state.activeInput.type === "Controller") {
-      activeInput.close();
-      this.setState({
-        activeInput: undefined
-      })
+  selectInputController(inputTypeName) {
+    if (inputTypeName === "Controller") {
+      this.activateInput(new ControllerInput(this.collectInputData));
+    } else if (inputTypeName === "Socket"){
+      this.activateInput(new Socket(this.collectInputData, this.state.socketURL));
     }
+  }
+
+  activateInput (newInput) {
+    newInput.mount();
+    this.setState ({
+      activeInput: newInput,
+    });
+  }
+
+  closeInput (activeInput) {
+    activeInput.close();
+    this.setState({
+      activeInput: undefined
+    })
   }
 
 
@@ -72,10 +74,10 @@ class InputController extends React.Component {
     return (
       <div>
         <div id="socketController">
-          <button onClick={this.toggleSocket}>{socketButtonText}</button>
+          <button onClick={this.toggleInput} name="Socket">{socketButtonText}</button>
         </div>
         <div id="controllerAPI">
-          <button onClick={this.toggleController}>{controllerButtonText}</button>
+          <button onClick={this.toggleInput} name="Controller">{controllerButtonText}</button>
         </div>
         <Display input={this.state.inputData}/>
       </div>

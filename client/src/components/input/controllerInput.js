@@ -36,11 +36,11 @@ class ControllerInput {
       let thumbsticks = {
         "left": {
           "x": thumbstickInputs[0],
-          "y": -thumbstickInputs[1],
+          "y": thumbstickInputs[1],
         },
         "right": {
           "x": thumbstickInputs[3],
-          "y": -thumbstickInputs[4],
+          "y": thumbstickInputs[4],
         }
       }
 

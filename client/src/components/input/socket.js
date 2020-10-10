@@ -10,26 +10,26 @@ class Socket{
     try {
       this.webSocket = new WebSocket(this.url);
       this.webSocket.onmessage = this.onMessage;
-      console.log("Socket Successfully Started")
+      console.log("Socket Successfully Started");
     } catch (error) {
       console.log("Socket Failed To Mount");
-      console.log(error)
+      console.log(error);
     }
   }
 
   onMessage = (event) => {
-    let messageData = JSON.parse(event.data)
-    this.updateCallback(messageData)
+    let messageData = JSON.parse(event.data);
+    this.updateCallback(messageData);
   }
 
   close () {
     try {
       this.webSocket.close();
-      this.webSocket = undefined
-      console.log("Socket Closed Successfully")
+      this.webSocket = undefined;
+      console.log("Socket Closed Successfully");
     } catch (error) {
-      console.log("Error When Closing Socket")
-      console.log(error)
+      console.log("Error When Closing Socket");
+      console.log(error);
     }
   }
 }
