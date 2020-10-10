@@ -9,8 +9,8 @@ function display (props) {
   return (
     <div id="ControllerDisplay">
       <img class="DisplayImage" id="DisplayBackground" src='./images/controller-Base.png'/>
-      <Buttons input={props.input ? props.input['buttons'] : {}}/>
-      <ThumbSticks input={props.input ? props.input['thumbsticks'] : {}}/>
+      <Buttons input={props.input['buttons']}/>
+      <ThumbSticks input={props.input['thumbsticks']}/>
     </div>
   )
 }

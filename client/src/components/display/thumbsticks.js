@@ -20,7 +20,7 @@ function calculatePosition (inputData) {
   let data = calculateOffset(inputData);
 
   return {
-    "marginTop": `${-data.yOffset}px`,
+    "marginTop": `${data.yOffset}px`,
     "marginLeft": `${data.xOffset}px`,
   };
 }
