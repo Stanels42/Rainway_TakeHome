@@ -4,8 +4,8 @@ function displayThumbSticks (props) {
   let leftStyle, rightStyle = {};
 
   if (props.input) {
-    leftStyle = calculatePosition(props.input['left']);
-    rightStyle = calculatePosition(props.input['right']);
+    leftStyle = calculateImagePosition(props.input['left']);
+    rightStyle = calculateImagePosition(props.input['right']);
   }
 
   return (
@@ -17,7 +17,7 @@ function displayThumbSticks (props) {
 }
 
 
-function calculatePosition (inputData) {
+function calculateImagePosition (inputData) {
 
   let data = calculateOffset(inputData);
 
@@ -29,7 +29,7 @@ function calculatePosition (inputData) {
 
 // Take the values and calculate the position
 function calculateOffset (vector) {
-  let maxOffset = 30;
+  let maxOffset = 30; //Max # of Pixels the Images will move from center
 
   let horizontalOffset = vector["x"] * maxOffset;
   let verticalOffset = vector["y"] * maxOffset
