@@ -11,7 +11,7 @@ class InputController extends React.Component {
     super(props);
 
     this.state = {
-      socketURL: 'ws:/localhost:4000',
+      socketURL: 'ws://localhost:4000',
       controllerUpdateRate: 2,
       activeInput: undefined,
       inputData: {},
